@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Stellar_Library"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;CMake Files\cmake\Modules\;CMake Files\sources\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stellar_suite">
+				<Option output="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/dist/stellar_suite" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/dist"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 stellar_suite"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stellar_suite/fast">
+				<Option output="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/dist/stellar_suite" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/dist"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 stellar_suite/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stellar">
+				<Option output="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/lib/libstellar.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/io"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/statistics"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_queries"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/vietoris_rips"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 stellar"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stellar/fast">
+				<Option output="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/lib/libstellar.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/io"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/statistics"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_queries"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator"/>
+					<Add directory="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/vietoris_rips"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 stellar/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/examples/stellar_suite/main.cpp">
+			<Option target="stellar_suite"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/examples/stellar_suite/main_cp_functions.cpp">
+			<Option target="stellar_suite"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/examples/stellar_suite/main_cp_functions.h">
+			<Option target="stellar_suite"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/examples/stellar_suite/main_simplicial_functions.cpp">
+			<Option target="stellar_suite"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/examples/stellar_suite/main_simplicial_functions.h">
+			<Option target="stellar_suite"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/examples/stellar_suite/main_utility_functions.cpp">
+			<Option target="stellar_suite"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/examples/stellar_suite/main_utility_functions.h">
+			<Option target="stellar_suite"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/io/reader.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/io/reader.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/io/writer.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/io/writer.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/contraction_simplifier_top.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/contraction_simplifier_top.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/contraction_simplifier_top_length.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/contraction_simplifier_weak.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/contraction_simplifier_weak.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/contraction_simplifier_weak_length.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/edges_aux_structures.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/simplification_aux_structures.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/simplification/simplification_aux_structures.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/statistics/index_statistics.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/statistics/statistics.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/statistics/statistics.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/statistics/statistics_index.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/node.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/node_stellar.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/node_stellar.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/node_v.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/reindexer.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/reindexer.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/run_iterator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/top_cell.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/top_cell.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/top_cp_cell.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/top_cp_cell.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/top_simplex.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_decomposition/top_simplex.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/box.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/cells_soup.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/explicit_cell.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/mesh.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/mesh_updater.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/point.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/spatial_subdivision.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/stellar_tree.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/stellar_tree.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/stellar_tree_generation.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/stellar_tree_update.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/stellar_tree_visit.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/stellar_tree/vertex.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/adjacency_aux_structure.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/adjacency_graph.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/adjacency_graph.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/halfedge.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/iastar.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/iastar.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/ig.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/ig_node.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/links_aux_structures.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/links_aux_structures.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/skeleton.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds/skeleton.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/adjacency_graph_extractor.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/adjacency_graph_extractor.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/halfedge_generator.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/halfedge_generator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/iastar_generator.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/iastar_generator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/iastar_statistics.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/ig_generator.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/ig_generator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/ig_statistics.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/skeleton_generator.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_ds_generator/skeleton_generator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_queries/topological_query_extractor.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/topological_queries/topological_query_extractor.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/basic_wrappers.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/cli_parameters.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/color.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/color.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/combinatorial_utilities.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/combinatorial_utilities.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/container_utilities.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/lru_cache.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/string_management.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/string_management.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/timer.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/timer.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/utilities/usage.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/connectedness_validator.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/connectedness_validator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/connectedness_validator_adjs.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/connectedness_validator_adjs.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/connectedness_validator_skeleton.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/connectedness_validator_skeleton.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/connectedness_validator_stats.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/links_validator.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/links_validator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/validator/mesh_repairer.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/vietoris_rips/blockers_extractor.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/vietoris_rips/blockers_extractor.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/vietoris_rips/vietoris_rips_aux_structures.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/vietoris_rips/vietoris_rips_generator.cpp">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/vietoris_rips/vietoris_rips_generator.h">
+			<Option target="stellar"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/cmake/Modules/FindGMP.cmake">
+			<Option virtualFolder="CMake Files\cmake\Modules\"/>
+		</Unit>
+		<Unit filename="/home/ilfelle/Dropbox/Code_Projects/Stellar_Decomposition_Framework/Stellar_Library/sources/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\sources\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
