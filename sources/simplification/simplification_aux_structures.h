@@ -33,7 +33,7 @@
 #include <utilities/usage.h>
 
 #include "edges_aux_structures.h"
-#include "quadric_aux_structures.h"
+//#include "quadric_aux_structures.h"
 
 class simplifier_parameters
 {

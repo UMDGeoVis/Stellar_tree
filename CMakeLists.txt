@@ -16,6 +16,8 @@ set(CMAKE_BUILD_TYPE Release)
 
 find_package(GMP REQUIRED)
 include_directories(${GMP_INCLUDE_DIR})
+find_package(BITMAGIC REQUIRED)
+include_directories(${BM_INCLUDE_DIR})
 #~ MESSAGE(STATUS "GMP LIB: " ${GMP_INCLUDE_DIR})
 
 #if(CMAKE_COMPILER_IS_GNUCXX) #do not work on mac
