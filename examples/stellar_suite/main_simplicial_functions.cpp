@@ -72,12 +72,12 @@ int extract_VTop_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
     time.stop();
     time.print_elapsed_time("Local VT computation ");
 
-    /// *** PARALLEL *** ///
-    time.start();
-    tree.parallel_visit(topological_queries::extract_VTop_Simplicial_wrapper,mesh,p);
-    time.stop();
-    time.print_elapsed_time("Local VT computation --- parallel --- ");
-    /// ****** ///
+//    /// *** PARALLEL *** ///
+//    time.start();
+//    tree.parallel_visit(topological_queries::extract_VTop_Simplicial_wrapper,mesh,p);
+//    time.stop();
+//    time.print_elapsed_time("Local VT computation --- parallel --- ");
+//    /// ****** ///
 
     /// this enables the statistic computation
     p.first = true;
@@ -97,12 +97,12 @@ int extract_VV_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
     time.stop();
     time.print_elapsed_time("Local VV computation ");
 
-    /// *** PARALLEL *** ///
-    time.start();
-    tree.parallel_visit(topological_queries::extract_VV_Simplicial_wrapper,mesh,p);
-    time.stop();
-    time.print_elapsed_time("Local VV computation --- parallel --- ");
-    /// ****** ///
+//    /// *** PARALLEL *** ///
+//    time.start();
+//    tree.parallel_visit(topological_queries::extract_VV_Simplicial_wrapper,mesh,p);
+//    time.stop();
+//    time.print_elapsed_time("Local VV computation --- parallel --- ");
+//    /// ****** ///
 
     /// this enables the statistic computation
     p.first = true;
