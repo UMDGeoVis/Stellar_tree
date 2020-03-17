@@ -44,11 +44,15 @@ typedef iset::const_iterator iset_const_iter;
 
 typedef std::vector<ivect> VT;
 typedef std::vector<ivect> ET;
+typedef std::set<ivect> ivect_set;
+typedef std::set<ivect> leaf_p_faces;
 
 typedef std::vector<VT> leaf_VT;
 typedef std::vector<iset> leaf_VV;
 typedef std::map<ivect,ET> leaf_ET;
 
-typedef std::set<ivect> leaf_p_faces;
+typedef std::vector<ivect_set> leaf_Vi;
+typedef std::map<ivect,ivect_set> leaf_ij;
+typedef std::map<ivect,ET> leaf_iT;
 
 #endif // TOPOLOGICAL_AUXILIARY_STRUCTURES_H

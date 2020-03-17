@@ -68,16 +68,28 @@ add_subdirectory(sources)
 
 ### MAIN OF THE LIBRARY
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist )
-add_executable(stellar_suite
-		examples/stellar_suite/main_utility_functions.h
-		examples/stellar_suite/main_utility_functions.cpp
-		examples/stellar_suite/main_simplicial_functions.h
-		examples/stellar_suite/main_simplicial_functions.cpp
-		examples/stellar_suite/main_cp_functions.h
-		examples/stellar_suite/main_cp_functions.cpp
-		examples/stellar_suite/main.cpp
-	)
-target_link_libraries(stellar_suite stellar ${GMP_LIBRARY})
+#add_executable(stellar_suite
+#		examples/stellar_suite/main_utility_functions.h
+#		examples/stellar_suite/main_utility_functions.cpp
+#		examples/stellar_suite/main_simplicial_functions.h
+#		examples/stellar_suite/main_simplicial_functions.cpp
+#		examples/stellar_suite/main_cp_functions.h
+#		examples/stellar_suite/main_cp_functions.cpp
+#		examples/stellar_suite/main.cpp
+#	)
+#target_link_libraries(stellar_suite stellar ${GMP_LIBRARY})
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist )
+add_executable(stellar_lite
+                examples/stellar_suite/main_utility_functions.h
+                examples/stellar_suite/main_utility_functions.cpp
+                examples/stellar_suite/main_simplicial_functions.h
+                examples/stellar_suite/main_simplicial_functions.cpp
+                examples/stellar_suite/main_cp_functions.h
+                examples/stellar_suite/main_cp_functions.cpp
+                examples/stellar_suite/main_lite.cpp
+        )
+target_link_libraries(stellar_lite stellar ${GMP_LIBRARY})
 
 ### TEST THE LIBRARY
 #set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/test )
