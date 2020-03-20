@@ -72,12 +72,12 @@ int extract_VTop_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
     time.stop();
     time.print_elapsed_time("Local VT computation ");
 
-//    /// *** PARALLEL *** ///
+    /// *** PARALLEL *** ///
 //    time.start();
 //    tree.parallel_visit(topological_queries::extract_VTop_Simplicial_wrapper,mesh,p);
 //    time.stop();
 //    time.print_elapsed_time("Local VT computation --- parallel --- ");
-//    /// ****** ///
+    /// ****** ///
 
     /// this enables the statistic computation
     p.first = true;
@@ -97,12 +97,12 @@ int extract_VV_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
     time.stop();
     time.print_elapsed_time("Local VV computation ");
 
-//    /// *** PARALLEL *** ///
+    /// *** PARALLEL *** ///
 //    time.start();
 //    tree.parallel_visit(topological_queries::extract_VV_Simplicial_wrapper,mesh,p);
 //    time.stop();
 //    time.print_elapsed_time("Local VV computation --- parallel --- ");
-//    /// ****** ///
+    /// ****** ///
 
     /// this enables the statistic computation
     p.first = true;
@@ -135,6 +135,110 @@ int extract_links_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
     cerr<<"max_vertices: "<<get<1>(p)<<endl;
     cerr<<"max_edges: "<<get<2>(p)<<endl;
     cerr<<"max_references: "<<get<3>(p)<<endl;
+
+    return (EXIT_SUCCESS);
+}
+
+int extract_ETop_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
+{
+    Timer time;
+    pair<bool,int> p; p.first = false; p.second = 0;
+
+    time.start();
+    tree.visit(topological_queries::extract_ETop_Simplicial_wrapper,tree.get_root(),mesh,p);
+    time.stop();
+    time.print_elapsed_time("Local ET computation ");
+
+    /// *** PARALLEL *** ///
+//    time.start();
+//    tree.parallel_visit(topological_queries::extract_ETop_Simplicial_wrapper,mesh,p);
+//    time.stop();
+//    time.print_elapsed_time("Local ET computation --- parallel --- ");
+    /// ****** ///
+
+    /// this enables the statistic computation
+//    p.first = true;
+//    tree.visit(topological_queries::extract_VTop_Simplicial_wrapper,tree.get_root(),mesh,p);
+//    cerr<<"max_list_summation: "<<p.second<<endl;
+
+    return (EXIT_SUCCESS);
+}
+
+int extract_FTop_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
+{
+    Timer time;
+    pair<bool,int> p; p.first = false; p.second = 0;
+
+    time.start();
+    tree.visit(topological_queries::extract_FTop_Simplicial_wrapper,tree.get_root(),mesh,p);
+    time.stop();
+    time.print_elapsed_time("Local FT computation ");
+
+    /// *** PARALLEL *** ///
+//    time.start();
+//    tree.parallel_visit(topological_queries::extract_FTop_Simplicial_wrapper,mesh,p);
+//    time.stop();
+//    time.print_elapsed_time("Local FT computation --- parallel --- ");
+    /// ****** ///
+
+    return (EXIT_SUCCESS);
+}
+
+int extract_VE_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
+{
+    Timer time;
+    pair<bool,int> p; p.first = false; p.second = 0;
+
+    time.start();
+    tree.visit(topological_queries::extract_VE_Simplicial_wrapper,tree.get_root(),mesh,p);
+    time.stop();
+    time.print_elapsed_time("Local VE computation ");
+
+    /// *** PARALLEL *** ///
+//    time.start();
+//    tree.parallel_visit(topological_queries::extract_VE_Simplicial_wrapper,mesh,p);
+//    time.stop();
+//    time.print_elapsed_time("Local VE computation --- parallel --- ");
+    /// ****** ///
+
+    return (EXIT_SUCCESS);
+}
+int extract_VF_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
+{
+    Timer time;
+    pair<bool,int> p; p.first = false; p.second = 0;
+
+    time.start();
+    tree.visit(topological_queries::extract_VF_Simplicial_wrapper,tree.get_root(),mesh,p);
+    time.stop();
+    time.print_elapsed_time("Local VF computation ");
+
+    /// *** PARALLEL *** ///
+//    time.start();
+//    tree.parallel_visit(topological_queries::extract_VF_Simplicial_wrapper,mesh,p);
+//    time.stop();
+//    time.print_elapsed_time("Local VF computation --- parallel --- ");
+    /// ****** ///
+
+    return (EXIT_SUCCESS);
+}
+
+int extract_EF_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh)
+{
+    Timer time;
+    pair<bool,int> p; p.first = false; p.second = 0;
+
+    time.start();
+    tree.visit(topological_queries::extract_EF_Simplicial_wrapper,tree.get_root(),mesh,p);
+    time.stop();
+    time.print_elapsed_time("Local EF computation ");
+
+    /// *** PARALLEL *** ///
+//    time.start();
+//    tree.parallel_visit(topological_queries::extract_EF_Simplicial_wrapper,mesh,p);
+//    time.stop();
+//    time.print_elapsed_time("Local EF computation --- parallel --- ");
+    /// ****** ///
 
     return (EXIT_SUCCESS);
 }

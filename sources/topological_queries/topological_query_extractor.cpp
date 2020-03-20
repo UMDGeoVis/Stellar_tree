@@ -106,4 +106,28 @@ void extract_p_faces_CP_wrapper_v2(Node_Stellar &n, CP_Mesh &mesh, tuple<int, bo
     extract_p_faces_v2(n,mesh,t);
 }
 
+void extract_ETop_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p)
+{
+    extract_ETop(n,mesh,p);
+}
+
+void extract_FTop_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p)
+{
+    extract_FTop(n,mesh,p);
+}
+
+void extract_VE_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p)
+{
+    extract_VE(n,mesh,p);
+}
+void extract_VF_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p)
+{
+    extract_VF(n,mesh,p);
+}
+
+void extract_EF_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p)
+{
+    extract_EF(n,mesh,p);
+}
+
 }

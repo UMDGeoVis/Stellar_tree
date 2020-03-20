@@ -34,6 +34,12 @@ int extract_links_relations(Stellar_Tree& tree, Simplicial_Mesh &mesh);
 int extract_p_faces(Stellar_Tree& tree, Simplicial_Mesh &mesh);
 int extract_p_faces_v2(Stellar_Tree& tree, Simplicial_Mesh &mesh);
 
+int extract_ETop_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh);
+int extract_FTop_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh);
+int extract_VE_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh);
+int extract_VF_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh);
+int extract_EF_relations(Stellar_Tree &tree, Simplicial_Mesh &mesh);
+
 int extract_adjacencies(Stellar_Tree &tree, Simplicial_Mesh &mesh, Reindexer &reindexer, cli_parameters &cli);
 int extract_global_skeleton(Stellar_Tree &tree, Simplicial_Mesh &mesh, cli_parameters &cli);
 

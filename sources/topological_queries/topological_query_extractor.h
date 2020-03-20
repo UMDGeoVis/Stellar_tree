@@ -115,6 +115,13 @@ void extract_VTop_stats_CP_wrapper(Node_Stellar &n, CP_Mesh &mesh, vector</*tupl
 void extract_VTop_VE_sizes_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, vector<pair<int,int> > &v_stats);
 void extract_VTop_VE_sizes_CP_wrapper(Node_Stellar &n, CP_Mesh &mesh, vector<pair<int,int> > &v_stats);
 
+void extract_ETop_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p);
+void extract_FTop_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p);
+
+void extract_VE_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p);
+void extract_VF_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p);
+
+void extract_EF_Simplicial_wrapper(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool,int> &p);
 
 
 /**
@@ -285,6 +292,46 @@ template<class C, class T> void extract_links(Node_Stellar &n, Mesh<C,T> &mesh, 
         if(get<3>(p) < reference_summation)
             get<3>(p) = reference_summation;
     }
+}
+
+template<class C, class T> void extract_ETop(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p);
+
+template<class C, class T> void extract_ETop(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p)
+{
+    leaf_ET allETres;
+    n.extract_local_ETop(mesh,allETres);
+}
+
+template<class C, class T> void extract_FTop(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p);
+
+template<class C, class T> void extract_FTop(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p)
+{
+    leaf_ET allETres;
+    n.extract_local_FTop(mesh,allETres);
+}
+
+template<class C, class T> void extract_VE(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p);
+
+template<class C, class T> void extract_VE(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p)
+{
+    leaf_Vi allVEres;
+    n.extract_local_VE(mesh,allVEres);
+}
+
+template<class C, class T> void extract_VF(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p);
+
+template<class C, class T> void extract_VF(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p)
+{
+    leaf_Vi allVFres;
+    n.extract_local_VF(mesh,allVFres);
+}
+
+template<class C, class T> void extract_EF(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p);
+
+template<class C, class T> void extract_EF(Node_Stellar &n, Mesh<C,T> &mesh, pair<bool,int> &p)
+{
+    leaf_ij allEFres;
+    n.extract_local_EF(mesh,allEFres);
 }
 
 /**

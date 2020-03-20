@@ -168,22 +168,28 @@ void Node_Stellar::extract_top_link(Top_CP_Cell &t, local_links &links)
 
 void Node_Stellar::extract_top_ETop(int d, int t_id, Top_Simplex &t, leaf_ET &ets, ET &empty_et)
 {
-    ivect e;
+//    cout << "extract_top_ETop" << endl;
+    ivect e = {-1,-1}; // dummy initialization
+//    cout << t << endl;
 
     for(int i=0; i<t.get_vertices_num(); i++)
     {
         for(int j=i+1; j<t.get_vertices_num(); j++)
         {
+//            cout << i << " " << j <<endl;
             t.TE(e,i,j);
+//            cout << e[0] << " " << e[1] <<endl;
             if(this->indexes_vertex(e[1])) // we process an edge only if it has alle the extrema already processed
             {
                 leaf_ET::iterator it = ets.find(e);
                 if(it!=ets.end())
                 {
+//                    cout<<"push da esistente" <<endl;
                     (it->second)[d].push_back(t_id);
                 }
                 else
                 {
+//                    cout<<"push da nuovo" <<endl;
                     pair<leaf_ET::iterator,bool> p = ets.insert(make_pair(e,empty_et));
                     ((p.first)->second)[d].push_back(t_id);
                 }
@@ -204,6 +210,29 @@ void Node_Stellar::extract_top_ETop(int d, int t_id, Top_CP_Cell &t, leaf_ET &et
         t.TE(e,j);
 
         if(this->indexes_vertex(e[1])) // we process an edge only if it has alle the extrema already processed
+        {
+            leaf_ET::iterator it = ets.find(e);
+            if(it!=ets.end())
+            {
+                (it->second)[d].push_back(t_id);
+            }
+            else
+            {
+                pair<leaf_ET::iterator,bool> p = ets.insert(make_pair(e,empty_et));
+                ((p.first)->second)[d].push_back(t_id);
+            }
+        }
+    }
+}
+
+void Node_Stellar::extract_top_FTop(int d, int t_id, Top_Simplex &t, leaf_ET &ets, ET &empty_et)
+{
+    ivect e;
+
+    for(int i=0; i<t.get_dfaces_num(); i++)
+    {
+        t.TF(e,i);
+        if(this->indexes_vertex(e.back())) // we process an edge only if it has alle the extrema already processed
         {
             leaf_ET::iterator it = ets.find(e);
             if(it!=ets.end())

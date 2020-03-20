@@ -96,7 +96,21 @@ template<class C, class T> void load_index(Stellar_Tree &tree, Mesh<C,T> &mesh, 
 }
 
 template<class M> void exec_topo_queries(Stellar_Tree &tree, M &mesh, cli_parameters &cli)
-{    
-    extract_VTop_relations(tree,mesh);
+{
     extract_VV_relations(tree,mesh);
+    cerr << "RAM peak for extracting VV relations: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
+    extract_VE_relations(tree,mesh);
+    cerr << "RAM peak for extracting VE relations: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
+    extract_VF_relations(tree,mesh);
+    cerr << "RAM peak for extracting VF relations: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
+    extract_VTop_relations(tree,mesh);
+    cerr << "RAM peak for extracting VT relations: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
+
+    extract_EF_relations(tree,mesh);
+    cerr << "RAM peak for extracting EF relations: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
+    extract_ETop_relations(tree,mesh);
+    cerr << "RAM peak for extracting ET relations: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
+
+    extract_FTop_relations(tree,mesh);
+    cerr << "RAM peak for extracting FT relations: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
 }

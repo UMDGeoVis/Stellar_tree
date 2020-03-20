@@ -187,6 +187,13 @@ public:
      */
     template<class C, class T> void extract_local_ETop(Mesh<C,T> &mesh, leaf_ET &ets);
 
+    template<class C, class T> void extract_local_FTop(Mesh<C,T> &mesh, leaf_ET &ets);
+
+    template<class C, class T> void extract_local_VE(Mesh<C,T> &mesh, leaf_Vi &ves);
+    template<class C, class T> void extract_local_VF(Mesh<C,T> &mesh, leaf_Vi &vfs);
+
+    template<class C, class T> void extract_local_EF(Mesh<C,T> &mesh, leaf_ij &efs);
+
     /**
      *
      */
@@ -342,6 +349,8 @@ private:
      * @param empty_et, an empty ETop relation used to initialize the ETop relation of a 'firstly touched' edge
      */
     void extract_top_ETop(int d, int t_id, Top_CP_Cell &t, leaf_ET &ets, ET &empty_et);
+
+    void extract_top_FTop(int d, int t_id, Top_Simplex &t, leaf_ET &ets, ET &empty_et);
 };
 
 template<class C, class T> void Node_Stellar::extract_local_VTop(Mesh<C,T> &mesh, leaf_VT &vts)
@@ -417,6 +426,115 @@ template<class C, class T> void Node_Stellar::extract_local_VV(Mesh<C,T> &mesh, 
     }
 }
 
+template<class C, class T> void Node_Stellar::extract_local_VE(Mesh<C,T> &mesh, leaf_Vi &ves)
+{
+    ves.assign(this->get_v_end()-this->get_v_start(),ivect_set());
+    ivect e;
+
+    for(int d=0; d<this->get_num_top_cells_encoded();d++)
+    {
+        for(RunIteratorPair itPair = this->make_t_array_iterator_pair(d); itPair.first != itPair.second; ++itPair.first)
+        {
+            RunIterator const& t_id = itPair.first;
+
+            if(!mesh.is_top_cell_removed(d,*t_id))
+            {
+                T& t = mesh.get_top_cell(d,*t_id);
+                for(int j=0; j<t.get_vertices_num(); j++)
+                {
+                    int real_index = abs(t.TV(j));
+                    if(this->indexes_vertex(real_index))
+                    {
+                        if(mesh.is_simplex(d)) // simplicial complexes
+                        {
+                            for(int i=1; i<t.get_vertices_num(); i++)
+                            {
+                                e = { real_index , t.TV((int)(j+i)%t.get_vertices_num()) };
+                                sort(e.begin(),e.end());
+                                ves[real_index-this->get_v_start()].insert(e);
+                            }
+                        }
+                        else // CP-complexes
+                        {
+                            // NOT IMPLEMENTED
+                            cerr << "[ERROR] VE extraction is not implemented for CP-complexes" << endl;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+template<class C, class T> void Node_Stellar::extract_local_VF(Mesh<C,T> &mesh, leaf_Vi &vfs)
+{
+    vfs.assign(this->get_v_end()-this->get_v_start(),ivect_set());
+    ivect f;
+    for(int d=0; d<this->get_num_top_cells_encoded();d++)
+    {
+        for(RunIteratorPair itPair = this->make_t_array_iterator_pair(d); itPair.first != itPair.second; ++itPair.first)
+        {
+            RunIterator const& t_id = itPair.first;
+
+            if(!mesh.is_top_cell_removed(d,*t_id))
+            {
+                T& t = mesh.get_top_cell(d,*t_id);
+                for(int j=0; j<t.get_vertices_num(); j++)
+                {
+                    t.get_d_cell(f,2,j);
+                    for (auto v : f)
+                    {
+                        if(this->indexes_vertex(v))
+                            vfs[v-this->get_v_start()].insert(f);
+                    }
+                }
+            }
+        }
+    }
+}
+
+template<class C, class T> void Node_Stellar::extract_local_EF(Mesh<C,T> &mesh, leaf_ij &efs)
+{
+    ivect f, e;
+    for(int d=0; d<this->get_num_top_cells_encoded();d++)
+    {
+        for(RunIteratorPair itPair = this->make_t_array_iterator_pair(d); itPair.first != itPair.second; ++itPair.first)
+        {
+            RunIterator const& t_id = itPair.first;
+
+            if(!mesh.is_top_cell_removed(d,*t_id))
+            {
+                T& t = mesh.get_top_cell(d,*t_id);
+                for(int j=0; j<t.get_vertices_num(); j++)
+                {
+                    t.get_d_cell(f,2,j);
+                    for(int j=0; j<f.size(); j++)
+                    {
+                        if(this->indexes_vertex(f[j]))
+                        {
+                            if(mesh.is_simplex(d)) // simplicial complexes
+                            {
+                                for(int i=1; i<f.size(); i++)
+                                {
+                                    e = { f[j] , f[(int)(j+i)%t.get_vertices_num()] };
+//                                    sort(e.begin(),e.end()); //disabled since f is already sorted
+                                    efs[e].insert(f);
+                                }
+                            }
+                            else // CP-complexes
+                            {
+                                // NOT IMPLEMENTED
+                                cerr << "[ERROR] EF extraction is not implemented for CP-complexes" << endl;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
 template<class C, class T> void Node_Stellar::extract_local_links(Mesh<C,T> &mesh, local_links &links)
 {
     links.init(*this,mesh.get_implicitly_encoded_cells_num());
@@ -450,6 +568,26 @@ template<class C, class T> void Node_Stellar::extract_local_ETop(Mesh<C,T> &mesh
             {
                 T& t = mesh.get_top_cell(d,*t_id);
                 this->extract_top_ETop(d,*t_id,t,ets,empty_et);
+            }
+        }
+    }
+}
+
+template<class C, class T> void Node_Stellar::extract_local_FTop(Mesh<C,T> &mesh, leaf_ET &ets)
+{
+    ET empty_et;
+    empty_et.assign(mesh.get_top_cells_types(),ivect());
+
+    for(int d=0; d<this->get_num_top_cells_encoded();d++)
+    {
+        for(RunIteratorPair itPair = this->make_t_array_iterator_pair(d); itPair.first != itPair.second; ++itPair.first)
+        {
+            RunIterator const& t_id = itPair.first;
+
+            if(!mesh.is_top_cell_removed(d,*t_id))
+            {
+                T& t = mesh.get_top_cell(d,*t_id);
+                this->extract_top_FTop(d,*t_id,t,ets,empty_et);
             }
         }
     }
