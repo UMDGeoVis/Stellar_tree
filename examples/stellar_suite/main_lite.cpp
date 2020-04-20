@@ -43,7 +43,8 @@ int main(int argc, char** argv)
         cerr << "RAM peak for encoding the Stellar tree: " << to_string(MemoryUsage().getValue_in_MB(false)) << " Mbs" << std::endl;
 
         // TOPOLOGICAL RELATION EXTRACTION
-        exec_topo_queries(tree,mesh,cli);
+        if (!cli.get_index_stats && !cli.count_sub_simplices)
+            exec_topo_queries(tree,mesh,cli);
     }
 
     return (EXIT_SUCCESS);

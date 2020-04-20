@@ -244,6 +244,8 @@ template<class C, class T> void Writer::write_index_stats(IndexStatistics& index
     if(verbose)
         indexStats.print_run_histogram();
 
+    return; // disabled estimation of storage costs.. not sure this is still correct..
+
     cerr << "=== Stellar tree storage costs (in MBs) ===" << endl;
     long indexed_mesh_cost = 0;
     long hierarchy_cost = 48 * indexStats.numNode;
