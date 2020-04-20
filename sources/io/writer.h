@@ -193,6 +193,7 @@ template<class C, class T> void Writer::write_index_stats(IndexStatistics& index
         cerr << "  explicit/vertex_encoding: "<< chi << " " <<indexStats.real_t_list_length[0] << endl;
         cerr << "  compressed_encoding: " << mu << " " << indexStats.t_list_length[0] << endl;
 
+        cerr << "=[FOR-STORAGE-ESTIMATION]= " << indexStats.numNode << " " << chi << " " << mu << endl;
     }
     else
     {
