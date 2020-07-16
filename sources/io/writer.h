@@ -197,6 +197,7 @@ template<class C, class T> void Writer::write_index_stats(IndexStatistics& index
     }
     else
     {
+        cerr << endl;
         for(unsigned i=0; i<indexStats.avg_Reindexed_TopPerLeaf.size(); i++)
         {
             if(mesh.get_top_cells_num(i) > 0)
@@ -217,7 +218,7 @@ template<class C, class T> void Writer::write_index_stats(IndexStatistics& index
                 cerr << indexStats.t_list_length[i] << " ";
                 cerr << indexStats.real_t_list_length[i] << " ";
                 cerr << indexStats.avg_run_length[i] << " ";
-                cerr << indexStats.tot_number_of_run[i] << " "<<endl;
+                cerr << indexStats.tot_number_of_run[i] << " ";
 
                 if(verbose)
                 {
@@ -235,7 +236,7 @@ template<class C, class T> void Writer::write_index_stats(IndexStatistics& index
                     cerr<<endl;
                 }
 
-                cerr << "  explicit/vertex_encoding: "<< chi << " " <<indexStats.real_t_list_length[i] << endl;
+                cerr << "  explicit_encoding: "<< chi << " " <<indexStats.real_t_list_length[i]<< " ";
                 cerr << "  compressed_encoding: " << mu << " " << indexStats.t_list_length[i] << endl;
             }
         }
