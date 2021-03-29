@@ -83,7 +83,7 @@ Once installed, execute from the command line in the root folder of the project 
 ```
 #!
 
-cmake CMakeList.txt
+cmake CMakeLists.txt
 ```
 and once configured execute:
 ```
