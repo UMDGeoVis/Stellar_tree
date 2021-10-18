@@ -7,15 +7,16 @@ The Stellar library provides a scalable and compact representation that encodes 
 
 ### Acknowledgments ###
 
-This work has been partially supported by the US National Science Foundation under grant number IIS-1910766 and by the University of Maryland under the 2017-2018 BSOS Dean Research Initiative Program. It has also been performed under the auspices of the U.S. Department of Energy by Lawrence Livermore National Laboratory under Contract DE-AC52-07NA27344.
+This work has been partially supported by the US National Science Foundation under grant number IIS-1910766 and by the University of Maryland under the 2017-2018 BSOS Dean Research Initiative Program. It has also been performed under the auspices of the U.S. Department of Energy by Lawrence Livermore National Laboratory under Contract DE-AC52-07NA27344, and of the German Aerospace Center (DLR) under Grant DLR-SC-2467209.
 
 ### Publications ###
 
 **Main paper (describing the Stellar decomposition idea and Stellar tree library)**
 
-- **The Stellar tree: a Compact Representation for Simplicial Complexes and Beyond**  
+- **The Stellar decomposition: A compact representation for simplicial complexes and beyond**  
 R. Fellegara, K. Weiss, and L. De Floriani  
-*Arxiv e-prints, 2019 (v2)* - [doi](https://arxiv.org/abs/1707.02211)
+*Computer & Graphics, 98: 322-343, 2021* - [doi](https://doi.org/10.1016/j.cag.2021.05.002)  
+*Arxiv e-prints, 2021 (v3)* - [doi](https://arxiv.org/abs/1707.02211)
 
 **Papers using Stellar tree library (or some older version of it)**
 
