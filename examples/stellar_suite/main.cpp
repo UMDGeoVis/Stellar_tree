@@ -5,6 +5,8 @@
 template<class C, class T> void load_index(Stellar_Tree& tree, Mesh<C,T> &mesh, Statistics& stats, Reindexer &reindexes, cli_parameters &cli);
 template<class M> void exec_topo_queries(Stellar_Tree& tree, M &mesh, cli_parameters &cli);
 
+template<class M> void exec_alpha_shape_generation(Stellar_Tree &tree, M &mesh, cli_parameters &cli);
+
 // NOTA: old approach, the visit function is implemented into the Generator class
 template<class C, class T> int extract_half_edges(Stellar_Tree& tree, Mesh<C,T>& mesh, cli_parameters &cli);
 // NOTA: old approach, the visit function is implemented into the Generator class
@@ -94,6 +96,8 @@ int main(int argc, char** argv)
 //            cerr<<"===[TODO] COMPUTE GRAPHS STATISTICS==="<<endl;
 //        }
         ///////////////////////////////////////////////////////////////////////////////////
+
+        exec_alpha_shape_generation(tree, mesh, cli);
 
         // TOPOLOGICAL RELATION EXTRACTION
         exec_topo_queries(tree,mesh,cli);
@@ -246,6 +250,612 @@ template<class M> void exec_topo_queries(Stellar_Tree &tree, M &mesh, cli_parame
     }
     if(cli.kind_of_operation == "pfaces2")
         extract_p_faces_v2(tree,mesh);
+}
+
+COORDBASETYPE calculate_top_simplex_radius(Top_Simplex &t, Simplicial_Mesh &mesh)
+{
+    int dim = t.get_vertices_num();
+    if (dim < 2)
+    {
+        return -1;
+    }
+
+    if (dim == 2) // LINE
+    {
+        ivect &vertices = t.get_vertices_array();
+        Vertex<COORDBASETYPE> &v1 = mesh.get_vertex(vertices[0]);
+        Vertex<COORDBASETYPE> &v2 = mesh.get_vertex(vertices[1]);
+        return v1.distance(v2) / 2.0;
+    }
+    else if (dim == 3) // TRIANGLE
+    {
+        ivect &vertices = t.get_vertices_array();
+        Vertex<COORDBASETYPE> &v1 = mesh.get_vertex(vertices[0]);
+        Vertex<COORDBASETYPE> &v2 = mesh.get_vertex(vertices[1]);
+        Vertex<COORDBASETYPE> &v3 = mesh.get_vertex(vertices[2]);
+        COORDBASETYPE d1 = v1.distance(v2);
+        COORDBASETYPE d2 = v1.distance(v3);
+        COORDBASETYPE d3 = v2.distance(v3);
+
+        COORDBASETYPE circum_radius_sq = pow(d1 * d2 * d3, 2) / ((d1 + d2 + d3) * (d2 + d3 - d1) * (d3 + d1 - d2) * (d1 + d2 - d3));
+        return sqrt(circum_radius_sq);
+    }
+    else if (dim == 4) // TETRAHEDRON
+    {
+        ivect &vertices = t.get_vertices_array();
+        Vertex<COORDBASETYPE> &v1 = mesh.get_vertex(vertices[0]);
+        Vertex<COORDBASETYPE> &v2 = mesh.get_vertex(vertices[1]);
+        Vertex<COORDBASETYPE> &v3 = mesh.get_vertex(vertices[2]);
+        Vertex<COORDBASETYPE> &v4 = mesh.get_vertex(vertices[3]);
+
+        {
+            // http://rodolphe-vaillant.fr/entry/127/find-a-tetrahedron-circumcenter
+            // https://github.com/czlowiekimadlo/Mag/blob/master/src/tetrahedron.cpp
+
+            // double circumcenter[3];
+            double *xi;
+            double *eta;
+            double *zeta;
+
+            double denominator;
+            // Use coordinates relative to point `a' of the tetrahedron.
+
+            // ba = b - a
+            double ba_x = v2.getC(0) - v1.getC(0);
+            double ba_y = v2.getC(1) - v1.getC(1);
+            double ba_z = v2.getC(2) - v1.getC(2);
+
+            // ca = c - a
+            double ca_x = v3.getC(0) - v1.getC(0);
+            double ca_y = v3.getC(1) - v1.getC(1);
+            double ca_z = v3.getC(2) - v1.getC(2);
+
+            // da = d - a
+            double da_x = v4.getC(0) - v1.getC(0);
+            double da_y = v4.getC(1) - v1.getC(1);
+            double da_z = v4.getC(2) - v1.getC(2);
+
+            // Squares of lengths of the edges incident to `a'.
+            double len_ba = ba_x * ba_x + ba_y * ba_y + ba_z * ba_z;
+            double len_ca = ca_x * ca_x + ca_y * ca_y + ca_z * ca_z;
+            double len_da = da_x * da_x + da_y * da_y + da_z * da_z;
+
+            // Cross products of these edges.
+
+            // c cross d
+            double cross_cd_x = ca_y * da_z - da_y * ca_z;
+            double cross_cd_y = ca_z * da_x - da_z * ca_x;
+            double cross_cd_z = ca_x * da_y - da_x * ca_y;
+
+            // d cross b
+            double cross_db_x = da_y * ba_z - ba_y * da_z;
+            double cross_db_y = da_z * ba_x - ba_z * da_x;
+            double cross_db_z = da_x * ba_y - ba_x * da_y;
+
+            // b cross c
+            double cross_bc_x = ba_y * ca_z - ca_y * ba_z;
+            double cross_bc_y = ba_z * ca_x - ca_z * ba_x;
+            double cross_bc_z = ba_x * ca_y - ca_x * ba_y;
+
+            // Calculate the denominator of the formula.
+            denominator = 0.5 / (ba_x * cross_cd_x + ba_y * cross_cd_y + ba_z * cross_cd_z);
+
+            // Calculate offset (from `a') of circumcenter.
+            double circ_x = (len_ba * cross_cd_x + len_ca * cross_db_x + len_da * cross_bc_x) * denominator;
+            double circ_y = (len_ba * cross_cd_y + len_ca * cross_db_y + len_da * cross_bc_y) * denominator;
+            double circ_z = (len_ba * cross_cd_z + len_ca * cross_db_z + len_da * cross_bc_z) * denominator;
+
+            // circumcenter[0] = circ_x + v1.getC(0);
+            // circumcenter[1] = circ_y + v1.getC(1);
+            // circumcenter[2] = circ_z + v1.getC(2);
+
+            double circum_radius_sq = pow(circ_x, 2) + pow(circ_y, 2) + pow(circ_z, 2);
+            if (circum_radius_sq <= 0) {
+                cerr << "Wrong circumradius calculation for tetrahedron" << endl;
+                exit(0);
+            }
+            return sqrt(circum_radius_sq);
+        }
+    }
+    else
+    {
+        cerr << "Unsupported dimension for circumradius calculation: " << dim << std::endl;
+        exit(0);
+    }
+}
+
+double alpha_min = 1e-8;
+// double alpha_value = 0.1; // 100; for terrain data
+set<Top_Simplex> final_tetra, final_tri, final_edges;
+
+void alpha_test(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool, int> &p)
+{
+    // determine node density
+    COORDBASETYPE x_min = std::numeric_limits<COORDBASETYPE>::infinity(),
+                  y_min = std::numeric_limits<COORDBASETYPE>::infinity(),
+                  z_min = std::numeric_limits<COORDBASETYPE>::infinity(),
+                  x_max = -std::numeric_limits<COORDBASETYPE>::infinity(),
+                  y_max = -std::numeric_limits<COORDBASETYPE>::infinity(),
+                  z_max = -std::numeric_limits<COORDBASETYPE>::infinity();
+    int num_of_vertices = 0;
+    for (RunIteratorPair itPair = n.make_v_array_iterator_pair(); itPair.first != itPair.second; ++itPair.first, ++num_of_vertices)
+    {
+        RunIterator const &v_id = itPair.first;
+        Vertex<COORDBASETYPE> &v = mesh.get_vertex(*v_id);
+
+        if (v.getC(0) < x_min)
+        {
+            x_min = v.getC(0);
+        }
+        if (v.getC(1) < y_min)
+        {
+            y_min = v.getC(1);
+        }
+        if (v.getC(2) < z_min)
+        {
+            z_min = v.getC(2);
+        }
+
+        if (v.getC(0) > x_max)
+        {
+            x_max = v.getC(0);
+        }
+        if (v.getC(1) > y_max)
+        {
+            y_max = v.getC(1);
+        }
+        if (v.getC(2) > z_max)
+        {
+            z_max = v.getC(2);
+        }
+    }
+    COORDBASETYPE volume = (x_max - x_min) * (y_max - y_min) * (z_max - z_min);
+    double alpha_value = volume / num_of_vertices / 1.2 * 0.4 + 0.1;
+
+    // alpha test
+    set<Top_Simplex> decomposed_tri, decomposed_edge;
+    if (n.get_num_top_cells_encoded() == 0)
+    {
+        return;
+    }
+    RunIterator t_id = n.t_array_begin_iterator(0);
+    Top_Simplex &t = mesh.get_top_cell(0, *t_id);
+    int dim = t.get_vertices_num();
+
+    // 4: tetrahedron
+    // 3: triangle
+    for (int d = dim; d > 1; d--)
+    {
+        if (dim - d < n.get_num_top_cells_encoded())
+        {
+            for (RunIteratorPair itPair = n.make_t_array_iterator_pair(dim - d); itPair.first != itPair.second; ++itPair.first)
+            {
+                RunIterator const &t_id = itPair.first;
+                Top_Simplex &t = mesh.get_top_cell(dim - d, *t_id);
+                COORDBASETYPE circumradius = calculate_top_simplex_radius(t, mesh);
+
+                if (circumradius < alpha_min)
+                {
+                    continue;
+                }
+
+                if (circumradius > alpha_value)
+                {
+                    for (int s = 0; s < t.get_sub_types_num(d - 2); s++)
+                    {
+                        ivect sub;
+                        t.get_d_cell(sub, d - 2, s);
+
+                        // for (auto x : sub) {
+                        //     cerr << x << " ";
+                        // }
+                        // Top_Simplex tmp = Top_Simplex(sub);
+                        // cerr <<circumradius << " "<< calculate_top_simplex_radius(tmp, mesh) << std::endl;
+                        // exit(0);
+
+                        if (d == 4)
+                        {
+                            decomposed_tri.insert(Top_Simplex(sub));
+                        }
+                        else if (d == 3)
+                        {
+                            decomposed_edge.insert(Top_Simplex(sub));
+                        }
+                    }
+                }
+                else
+                {
+                    if (d == 4)
+                    {
+                        final_tetra.insert(t);
+                    }
+                    else if (d == 3)
+                    {
+                        final_tri.insert(t);
+                    }
+                    else if (d == 2)
+                    {
+                        final_edges.insert(t);
+                    }
+                }
+            }
+        }
+
+        if (d == 3)
+        {
+            for (Top_Simplex tri : decomposed_tri)
+            {
+                COORDBASETYPE circumradius = calculate_top_simplex_radius(tri, mesh);
+
+                if (circumradius < alpha_min)
+                {
+                    continue;
+                }
+                if (circumradius > alpha_value)
+                {
+                    for (int s = 0; s < 3; s++)
+                    {
+                        ivect sub;
+                        tri.get_d_cell(sub, 1, s);
+                        decomposed_edge.insert(Top_Simplex(sub));
+                    }
+                }
+                else
+                {
+                    final_tri.insert(tri);
+                }
+            }
+        }
+        else if (d == 2)
+        {
+            for (Top_Simplex edge : decomposed_edge)
+            {
+                COORDBASETYPE circumradius = calculate_top_simplex_radius(edge, mesh);
+
+                if (circumradius < alpha_min)
+                {
+                    continue;
+                }
+                if (circumradius < alpha_value)
+                {
+                    final_edges.insert(edge);
+                }
+            }
+        }
+    }
+}
+
+// build connectivity graph for alpha shape test result
+//    every top simplex is considered as a collection of edges carrying connectivity info for each vertex
+std::unordered_map<int, int> connected_component_labels;
+void dfs_on_connectivity_graph(int vid, std::unordered_map<int, iset> &connectivity, std::unordered_map<int, bool> &is_visited, int label)
+{
+    is_visited[vid] = true;
+    connected_component_labels[vid] = label;
+    for (int adj_vid : connectivity[vid])
+    {
+        if (!is_visited[adj_vid])
+        {
+            dfs_on_connectivity_graph(adj_vid, connectivity, is_visited, label);
+        }
+    }
+}
+
+void build_connectivity_graph()
+{
+    std::unordered_map<int, iset> connectivity;
+    std::unordered_map<int, bool> is_visited;
+    iset all_vertices;
+
+    std::vector<Top_Simplex> alpha_shape;
+    std::copy(final_tetra.begin(), final_tetra.end(), std::back_inserter(alpha_shape));
+    std::copy(final_tri.begin(), final_tri.end(), std::back_inserter(alpha_shape));
+    std::copy(final_edges.begin(), final_edges.end(), std::back_inserter(alpha_shape));
+
+    for (Top_Simplex &simplex : alpha_shape)
+    {
+        for (int s = 0; s < simplex.get_sub_types_num(1); s++)
+        {
+            ivect sub;
+            simplex.get_d_cell(sub, 1, s);
+            connectivity[sub[0]].insert(sub[1]);
+            connectivity[sub[1]].insert(sub[0]);
+            is_visited[sub[0]] = false;
+            is_visited[sub[1]] = false;
+        }
+
+        ivect &vertices = simplex.get_vertices_array();
+        std::copy(vertices.begin(), vertices.end(), std::inserter(all_vertices, all_vertices.end()));
+    }
+
+
+    // for (auto x : connectivity) {
+    //     std::cout << x.first << ": \t";
+    //     for (auto y : x.second) {
+    //         std::cout << y << " ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+
+    int connected_component_label = 0;
+    for (int vid : all_vertices)
+    {
+        if (!is_visited[vid])
+        {
+            dfs_on_connectivity_graph(vid, connectivity, is_visited, connected_component_label++);
+        }
+    }
+    std::cout << "Number of connected component: " << connected_component_label << std::endl;
+}
+
+void save_alpha_shape(const char *ofname, Simplicial_Mesh &mesh)
+{
+    int pts_num = mesh.get_vertices_num();
+    int cells_num = final_tetra.size() + final_tri.size() + final_edges.size();
+
+    std::cout << "Save alpha shape: number of cells " << final_tetra.size() << " " << final_tri.size() << " " << final_edges.size() << std::endl;
+
+    ofstream ofs(ofname);
+    ofs << std::fixed << std::setprecision(8);
+    ofs << "# vtk DataFile Version 2.0\n\n";
+    ofs << "ASCII \n";
+    ofs << "DATASET UNSTRUCTURED_GRID\n\n";
+    ofs << "POINTS " << pts_num << " float\n";
+    //  points
+    for (int i = 1; i <= pts_num; ++i)
+    {
+        Vertex<COORDBASETYPE> &v = mesh.get_vertex(i);
+        for (int j = 0; j < v.get_dimension(); j++)
+        {
+            ofs << v.getC(j) << " ";
+        }
+        ofs << std::endl;
+    }
+    //  cells
+    ofs << "CELLS " << cells_num << " " << 5 * final_tetra.size() + 4 * final_tri.size() + 3 * final_edges.size() << std::endl;
+    // tetras
+    for (auto tt : final_tetra)
+    {
+        // vector<int> pids = tt.getVertices();
+        ofs << tt.get_vertices_num() << " ";
+        for (auto &pid : tt.get_vertices_array())
+        {
+            ofs << pid - 1 << " ";
+        }
+        ofs << std::endl;
+    }
+    // triangles
+    for (auto tt : final_tri)
+    {
+        // vector<int> pids = tt.getVertices();
+        ofs << tt.get_vertices_num() << " ";
+        for (auto &pid : tt.get_vertices_array())
+        {
+            ofs << pid - 1 << " ";
+        }
+        ofs << std::endl;
+    }
+    // edges
+    for (auto tt : final_edges)
+    {
+        // vector<int> pids = tt.getVertices();
+        ofs << tt.get_vertices_num() << " ";
+        for (auto &pid : tt.get_vertices_array())
+        {
+            ofs << pid - 1 << " ";
+        }
+        ofs << std::endl;
+    }
+
+    //  cell types
+    ofs << "CELL_TYPES " << cells_num << endl;
+    //  VTK_TETRA (=10)
+    //  tetras
+    for (const auto &tt : final_tetra)
+    {
+        ofs << "10 ";
+    }
+    //  VTK_TRIANGLE(=5)
+    for (const auto &tt : final_tri)
+    {
+        ofs << "5 ";
+    }
+    //  VTK_LINE (=3)
+    for (const auto &tt : final_edges)
+    {
+        ofs << "3 ";
+    }
+
+    // alpha_sq for each simplex on alpha shape
+    // ofs << "CELL_DATA " << cells_num << endl;
+    // ofs << "FIELD FieldData 1\n";
+    // ofs << "a_sq 1 " << cells_num << " float\n";
+    // //  tetras
+    // for (Top_Simplex tt : final_tetra)
+    // {
+    //     ofs << calculate_top_simplex_radius(tt, mesh) << "\n";
+    // }
+    // //  triangles
+    // for (Top_Simplex tt : final_tri)
+    // {
+    //     ofs << calculate_top_simplex_radius(tt, mesh) << "\n";
+    // }
+    // //  edges
+    // for (Top_Simplex tt : final_edges)
+    // {
+    //     ofs << calculate_top_simplex_radius(tt, mesh) << "\n";
+    // }
+
+    // connected component labeling
+    ofs << "POINT_DATA " << pts_num << std::endl;
+    ofs << "FIELD FieldData 1\n"
+        << "label 1 " << pts_num << " int\n";
+    for (int vid = 1; vid <= pts_num; vid++)
+    {
+        if (connected_component_labels.count(vid) == 1)
+        {
+            ofs << connected_component_labels[vid] << " ";
+        }
+        else
+        {
+            ofs << "-1 ";
+        }
+    }
+    ofs << std::endl;
+
+    ofs.close();
+}
+
+/* Test functions start */
+std::vector<std::vector<COORDBASETYPE>> bboxes;
+void nodes_vis(Node_Stellar &n, Simplicial_Mesh &mesh, pair<bool, int> &p)
+{
+    int node_id = rand() % 1000;
+    COORDBASETYPE x_min = std::numeric_limits<COORDBASETYPE>::infinity(),
+                  y_min = std::numeric_limits<COORDBASETYPE>::infinity(),
+                  z_min = std::numeric_limits<COORDBASETYPE>::infinity(),
+                  x_max = -std::numeric_limits<COORDBASETYPE>::infinity(),
+                  y_max = -std::numeric_limits<COORDBASETYPE>::infinity(),
+                  z_max = -std::numeric_limits<COORDBASETYPE>::infinity();
+    int num_of_vertices = 0;
+    for (RunIteratorPair itPair = n.make_v_array_iterator_pair(); itPair.first != itPair.second; ++itPair.first, ++num_of_vertices)
+    {
+        RunIterator const &v_id = itPair.first;
+        Vertex<COORDBASETYPE> &v = mesh.get_vertex(*v_id);
+        v.setF(1, node_id);
+
+        if (v.getC(0) < x_min)
+        {
+            x_min = v.getC(0);
+        }
+        if (v.getC(1) < y_min)
+        {
+            y_min = v.getC(1);
+        }
+        if (v.getC(2) < z_min)
+        {
+            z_min = v.getC(2);
+        }
+
+        if (v.getC(0) > x_max)
+        {
+            x_max = v.getC(0);
+        }
+        if (v.getC(1) > y_max)
+        {
+            y_max = v.getC(1);
+        }
+        if (v.getC(2) > z_max)
+        {
+            z_max = v.getC(2);
+        }
+    }
+    COORDBASETYPE volume = (x_max - x_min) * (y_max - y_min) * (z_max - z_min);
+    bboxes.push_back({x_min, y_min, z_min, x_max, y_max, z_max, volume / num_of_vertices});
+}
+
+void save_node_vis(string mesh_path, Simplicial_Mesh &mesh)
+{
+    int pts_num = mesh.get_vertices_num();
+    ofstream ofs((get_path_without_file_extension(mesh_path) + "_test.vtk").c_str());
+    ofs << std::fixed << std::setprecision(8);
+    ofs << "# vtk DataFile Version 2.0\n\n";
+    ofs << "ASCII \n";
+    ofs << "DATASET UNSTRUCTURED_GRID\n\n";
+    ofs << "POINTS " << pts_num << " float\n";
+
+    //  points
+    for (int i = 1; i <= pts_num; ++i)
+    {
+        Vertex<COORDBASETYPE> &v = mesh.get_vertex(i);
+        for (int j = 0; j < v.get_dimension(); j++)
+        {
+            ofs << v.getC(j) << " ";
+        }
+        ofs << std::endl;
+    }
+
+    ofs << "POINT_DATA " << pts_num << std::endl;
+    ofs << "FIELD FieldData 1\n";
+    ofs << "node_id 1 " << pts_num << " int\n";
+    for (int i = 1; i <= pts_num; ++i)
+    {
+        Vertex<COORDBASETYPE> &v = mesh.get_vertex(i);
+        ofs << int(v.getF(1)) << std::endl;
+    }
+    ofs.close();
+
+    // save bboxes to another vtk file
+    size_t num_of_bboxes = bboxes.size();
+    ofstream ofs2((get_path_without_file_extension(mesh_path) + "_test_bbox.vtk").c_str());
+    ofs2 << std::fixed << std::setprecision(8);
+    ofs2 << "# vtk DataFile Version 2.0\n\n";
+    ofs2 << "ASCII \n";
+    ofs2 << "DATASET POLYDATA\n\n";
+    ofs2 << "POINTS " << num_of_bboxes * 8 << " float\n";
+    for (size_t i = 0; i < num_of_bboxes; i++)
+    {
+        std::vector<COORDBASETYPE> &bbox = bboxes[i];
+        ofs2 << bbox[0] << " " << bbox[1] << " " << bbox[2] << "\n"
+             << bbox[3] << " " << bbox[1] << " " << bbox[2] << "\n"
+             << bbox[3] << " " << bbox[4] << " " << bbox[2] << "\n"
+             << bbox[0] << " " << bbox[4] << " " << bbox[2] << "\n"
+             << bbox[0] << " " << bbox[1] << " " << bbox[5] << "\n"
+             << bbox[3] << " " << bbox[1] << " " << bbox[5] << "\n"
+             << bbox[3] << " " << bbox[4] << " " << bbox[5] << "\n"
+             << bbox[0] << " " << bbox[4] << " " << bbox[5] << "\n";
+    }
+
+    ofs2 << "POLYGONS " << num_of_bboxes * 6 << " " << num_of_bboxes * 30 << std::endl;
+    for (size_t i = 0; i < num_of_bboxes; i++)
+    {
+        size_t offset = i * 8;
+        ofs2 << "4 " << offset + 0 << " " << offset + 1 << " " << offset + 2 << " " << offset + 3 << "\n"
+             << "4 " << offset + 4 << " " << offset + 5 << " " << offset + 6 << " " << offset + 7 << "\n"
+             << "4 " << offset + 0 << " " << offset + 1 << " " << offset + 5 << " " << offset + 4 << "\n"
+             << "4 " << offset + 2 << " " << offset + 3 << " " << offset + 7 << " " << offset + 6 << "\n"
+             << "4 " << offset + 0 << " " << offset + 4 << " " << offset + 7 << " " << offset + 3 << "\n"
+             << "4 " << offset + 1 << " " << offset + 2 << " " << offset + 6 << " " << offset + 5 << "\n";
+    }
+    ofs2 << std::endl;
+
+    ofs2 << "CELL_DATA " << num_of_bboxes * 6 << "\n"
+        << "FIELD FieldData 1\n"
+        << "density 1 " << num_of_bboxes * 6 << " float" << std::endl;
+    for (size_t i = 0; i < num_of_bboxes; i++)
+    {
+        ofs2 << bboxes[i][6] << " " << bboxes[i][6] << " " << bboxes[i][6] << " " << bboxes[i][6] << " " << bboxes[i][6] << " " << bboxes[i][6] << " ";
+    }
+    ofs2 << std::endl;
+    ofs2.close();
+}
+/* Test functions end */
+
+template <class M>
+void exec_alpha_shape_generation(Stellar_Tree &tree, M &mesh, cli_parameters &cli)
+{
+    pair<bool, int> p;
+    p.first = false;
+    p.second = 0;
+    Timer time;
+
+    time.start();
+    tree.visit(alpha_test, tree.get_root(), mesh, p);
+    time.stop();
+    time.print_elapsed_time("Alpha Shape Generation ");
+
+    // time.start();
+    // build_connectivity_graph();
+    // time.stop();
+    // time.print_elapsed_time("Connected component labeling ");
+
+    save_alpha_shape((get_path_without_file_extension(cli.mesh_path) + "_as.vtk").c_str(), mesh);
+
+    // time.start();
+    // tree.visit(nodes_vis, tree.get_root(), mesh, p);
+    // time.stop();
+    // time.print_elapsed_time("nodes_vis function ");
+    // save_node_vis(cli.mesh_path, mesh);
 }
 
 // NOTA: old approach, the visit function is implemented into the HalfEdge_Generator class
